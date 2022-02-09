@@ -11,8 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 public class UserAPIImpl implements UserAPI {
 
     @Override
-    @PostMapping("/login")
-    public boolean login(@RequestBody String username,@RequestBody String password) {
+    public boolean login(String username,String password) {
         return true;
     }
 }
