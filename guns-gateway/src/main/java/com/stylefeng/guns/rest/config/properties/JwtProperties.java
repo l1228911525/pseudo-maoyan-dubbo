@@ -3,6 +3,9 @@ package com.stylefeng.guns.rest.config.properties;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 
+import java.util.LinkedList;
+import java.util.List;
+
 /**
  * jwt相关配置
  *
@@ -25,7 +28,7 @@ public class JwtProperties {
 
     private String md5Key = "randomKey";
 
-    private String ignoreUrl = "";
+    private List<String> ignoreUrl = new LinkedList<>();
 
     public static String getJwtPrefix() {
         return JWT_PREFIX;
@@ -71,11 +74,11 @@ public class JwtProperties {
         this.md5Key = md5Key;
     }
 
-    public String getIgnoreUrl() {
+    public List<String> getIgnoreUrl() {
         return ignoreUrl;
     }
 
-    public void setIgnoreUrl(String ignoreUrl) {
+    public void setIgnoreUrl(List<String> ignoreUrl) {
         this.ignoreUrl = ignoreUrl;
     }
 }

@@ -4,16 +4,17 @@ import com.alibaba.dubbo.config.annotation.Reference;
 import com.alibaba.dubbo.config.annotation.Service;
 import com.stylefeng.guns.api.user.UserAPI;
 import org.springframework.stereotype.Component;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.*;
 
-@Component
+//@Component
+@RestController
+@RequestMapping("/user")
 public class UserApiSample {
 
     @Reference(interfaceClass = UserAPI.class)
     private UserAPI userAPI;
-
-    public boolean login(String username,String password) {
+    @GetMapping("/login")
+    public int login(String username,String password) {
 
         System.out.println("username = " + username + ", password = " + password);
 
