@@ -56,14 +56,19 @@ public class UserServiceImpl implements UserAPI {
         moocUserT.setBeginTime(new Date());
         moocUserT.setUpdateTime(new Date());
 
-        Integer insert = moocUserTMapper.insert(moocUserT);
+        Integer isSuccess = moocUserTMapper.insert(moocUserT);
 
-        if(insert > 0)
+        if(isSuccess > 0)
             return true;
         else
             return false;
     }
 
+    /**
+     * 检测用户名是否存在
+     * @param username 需要检测的用户名
+     * @return false：已存在，true：不存在
+     */
     @Override
     public boolean checkUsername(String username) {
 
