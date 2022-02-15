@@ -1,6 +1,7 @@
 package com.stylefeng.guns.api.user;
 
 import com.stylefeng.guns.api.dto.UserModel;
+import com.stylefeng.guns.api.vo.UserInfoModel;
 
 public interface UserAPI {
 
@@ -18,8 +19,8 @@ public interface UserAPI {
 
     public boolean logout();
 
-    public void getUserInfo(String authorizationHeader);
+    public UserInfoModel getUserInfo(int uuid);
 
-    public void updateUserInfo();
+    public UserInfoModel updateUserInfo(UserInfoModel userInfoModel);
 
 }

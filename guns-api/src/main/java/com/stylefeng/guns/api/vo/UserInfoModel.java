@@ -26,14 +26,14 @@ public class UserInfoModel {
     // 头像地址
     private String headAddress;
     // 创建时间
-    private String createTime;
+    private Date createTime;
     // 更新时间
-    private String updateTime;
+    private Date updateTime;
 
     public UserInfoModel() {
     }
 
-    public UserInfoModel(String uuid, String username, String nickname, String email, String phone, int sex, Date birthday, int lifeState, String biography, String address, String headAddress, String createTime, String updateTime) {
+    public UserInfoModel(String uuid, String username, String nickname, String email, String phone, int sex, Date birthday, int lifeState, String biography, String address, String headAddress, Date createTime, Date updateTime) {
         this.uuid = uuid;
         this.username = username;
         this.nickname = nickname;
@@ -137,19 +137,19 @@ public class UserInfoModel {
         this.headAddress = headAddress;
     }
 
-    public String getCreateTime() {
+    public Date getCreateTime() {
         return createTime;
     }
 
-    public void setCreateTime(String createTime) {
+    public void setCreateTime(Date createTime) {
         this.createTime = createTime;
     }
 
-    public String getUpdateTime() {
+    public Date getUpdateTime() {
         return updateTime;
     }
 
-    public void setUpdateTime(String updateTime) {
+    public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
     }
 }

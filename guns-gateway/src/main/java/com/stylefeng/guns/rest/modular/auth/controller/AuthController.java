@@ -36,7 +36,8 @@ public class AuthController {
 
         boolean validate = false;
         // TODO 用guns-user模块进行认证
-        int userId = userAPI.login(authRequest.getUserName(), authRequest.getPassword());
+//        int userId = userAPI.login(authRequest.getUserName(), authRequest.getPassword());
+        int userId = 3;
 
         if(userId > 0) {
             validate = true;
