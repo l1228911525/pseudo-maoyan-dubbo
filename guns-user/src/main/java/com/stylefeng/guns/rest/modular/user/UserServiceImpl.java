@@ -8,6 +8,7 @@ import com.stylefeng.guns.api.vo.UserInfoModel;
 import com.stylefeng.guns.core.util.MD5Util;
 import com.stylefeng.guns.rest.common.persistence.dao.MoocUserTMapper;
 import com.stylefeng.guns.rest.common.persistence.model.MoocUserT;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -20,6 +21,7 @@ import java.util.Date;
 @Service(interfaceClass = UserAPI.class)
 public class UserServiceImpl implements UserAPI {
 
+    @Autowired
     private MoocUserTMapper moocUserTMapper;
 
     @Override

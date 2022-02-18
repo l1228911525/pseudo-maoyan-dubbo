@@ -16,7 +16,7 @@ public class UserController {
     private UserAPI userAPI;
 
     @PostMapping("/register")
-    public ResponseVO register(@RequestBody UserModel userModel) {
+    public ResponseVO register(UserModel userModel) {
 
         if(userModel.getUsername() == null || userModel.getUsername().length() == 0)
             return ResponseVO.serviceFail("用户名不能为空");
@@ -33,7 +33,7 @@ public class UserController {
     }
 
     @PostMapping("/check")
-    public ResponseVO checkUsername(@RequestBody String username){
+    public ResponseVO checkUsername(String username){
 
         if(username == null || "".equals(username))
             return ResponseVO.serviceFail("用户名不能为空");
@@ -74,7 +74,7 @@ public class UserController {
     }
 
     @PostMapping("/updateUserInfo")
-    public ResponseVO updateUserInfo(@RequestBody UserInfoModel userInfoModel) {
+    public ResponseVO updateUserInfo(UserInfoModel userInfoModel) {
 
         String currentId = CurrentUser.getCurrentId();
 
