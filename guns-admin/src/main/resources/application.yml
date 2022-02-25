@@ -11,7 +11,7 @@ guns:
 
 spring:
   profiles:
-    active: @spring.active@
+    active: test
   mvc:
     static-path-pattern: /static/**
     view:
@@ -66,13 +66,13 @@ guns:
       - dataSourceBiz
 
 ---
-
+# test环境的数据库是腾讯云数据库
 spring:
   profiles: test
   datasource:
-    url: jdbc:mysql://127.0.0.1:3306/guns?autoReconnect=true&useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=CONVERT_TO_NULL&useSSL=false&serverTimezone=UTC
+    url: jdbc:mysql://gz-cdb-gewkrs91.sql.tencentcdb.com:57618/guns?autoReconnect=true&useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=CONVERT_TO_NULL&useSSL=false&serverTimezone=UTC
     username: root
-    password: root
+    password: lqy960415
     filters: wall,mergeStat
 
 ---

@@ -78,7 +78,7 @@ public class DefaultFilmServiceImpl implements FilmServiceAPI {
     }
 
     @Override
-    public FilmVO getHotFilms(boolean isLimit, int nums) {
+    public FilmVO getHotFilms(boolean isLimit, int nums, int nowPage, int sortId, int sourceId, int yearId, int catId) {
         FilmVO filmVO = new FilmVO();
         List<FilmInfo> filmInfos = new ArrayList<>();
 
@@ -96,12 +96,57 @@ public class DefaultFilmServiceImpl implements FilmServiceAPI {
             filmVO.setFilmInfo(filmInfos);
         } else {
             // 如果不是，则为列表页，同样需要限制内容为热映影片
+            Page<MoocFilmT> page = new Page<>(nowPage, nums);
+
+            //排序方式，1-按热门搜索，2-按时间搜索，3-按评价搜索
+            switch (sortId) {
+                case 1:
+                    page = new Page<>(nowPage, nums, "film_box_office");
+                    break;
+                case 2:
+                    page = new Page<>(nowPage, nums, "film_time");
+                    break;
+                case 3:
+                    page = new Page<>(nowPage, nums, "film_score");
+                    break;
+                default:
+                    page = new Page<>(nowPage, nums, "film_box_office");
+                    break;
+            }
+
+            if(sourceId != 99) {
+                entityWrapper.eq("film_source", sourceId);
+            }
+
+            if(yearId != 99) {
+
+                entityWrapper.eq("film_date", yearId);
+            }
+
+            if(catId != 99) {
+                String conditionStr = "%#" + catId + "#%";
+                entityWrapper.like("film_cats", conditionStr);
+            }
+
+            List<MoocFilmT> moocFilms = filmTMapper.selectPage(page, entityWrapper);
+
+            filmInfos = getFilmInfos(moocFilms);
+            filmVO.setFilmNum(filmInfos.size());
+
+            Integer totalCount = filmTMapper.selectCount(entityWrapper);
+
+            int totalPages = (totalCount / nums) + 1;
+
+            filmVO.setFilmInfo(filmInfos);
+
+            filmVO.setTotalPage(totalPages);
+            filmVO.setNowPage(nowPage);
         }
         return filmVO;
     }
 
     @Override
-    public FilmVO getSoonFilms(boolean isLimit, int nums) {
+    public FilmVO getSoonFilms(boolean isLimit, int nums, int nowPage, int sortId, int sourceId, int yearId, int catId) {
         FilmVO filmVO = new FilmVO();
         List<FilmInfo> filmInfos = new ArrayList<>();
 
@@ -119,7 +164,113 @@ public class DefaultFilmServiceImpl implements FilmServiceAPI {
             filmVO.setFilmInfo(filmInfos);
         } else {
             // 如果不是，则为列表页，同样需要限制内容为热映影片
+            Page<MoocFilmT> page = new Page<>(nowPage, nums);
+
+            //排序方式，1-按热门搜索，2-按时间搜索，3-按评价搜索
+            switch (sortId) {
+                case 1:
+                    page = new Page<>(nowPage, nums, "film_preSaleNum");
+                    break;
+                case 2:
+                    page = new Page<>(nowPage, nums, "film_time");
+                    break;
+                case 3:
+                    page = new Page<>(nowPage, nums, "film_preSaleNum");
+                    break;
+                default:
+                    page = new Page<>(nowPage, nums, "film_preSaleNum");
+                    break;
+            }
+
+
+            if(sourceId != 99) {
+                entityWrapper.eq("film_source", sourceId);
+            }
+
+            if(yearId != 99) {
+
+                entityWrapper.eq("film_date", yearId);
+            }
+
+            if(catId != 99) {
+                String conditionStr = "%#" + catId + "#%";
+                entityWrapper.like("film_cats", conditionStr);
+            }
+
+            List<MoocFilmT> moocFilms = filmTMapper.selectPage(page, entityWrapper);
+
+            filmInfos = getFilmInfos(moocFilms);
+            filmVO.setFilmNum(filmInfos.size());
+
+            Integer totalCount = filmTMapper.selectCount(entityWrapper);
+
+            int totalPages = (totalCount / nums) + 1;
+
+            filmVO.setFilmInfo(filmInfos);
+
+            filmVO.setTotalPage(totalPages);
+            filmVO.setNowPage(nowPage);
         }
+        return filmVO;
+    }
+
+    @Override
+    public FilmVO getClassicFilms(int nums, int nowPage, int sortId, int sourceId, int yearId, int catId) {
+
+        FilmVO filmVO = new FilmVO();
+        List<FilmInfo> filmInfos = new ArrayList<>();
+
+        EntityWrapper<MoocFilmT> entityWrapper = new EntityWrapper<>();
+        entityWrapper.eq("film_status", "3");
+
+        // 如果不是，则为列表页，同样需要限制内容为热映影片
+        Page<MoocFilmT> page = new Page<>(nowPage, nums);
+
+        //排序方式，1-按热门搜索，2-按时间搜索，3-按评价搜索
+        switch (sortId) {
+            case 1:
+                page = new Page<>(nowPage, nums, "film_box_office");
+                break;
+            case 2:
+                page = new Page<>(nowPage, nums, "film_time");
+                break;
+            case 3:
+                page = new Page<>(nowPage, nums, "film_score");
+                break;
+            default:
+                page = new Page<>(nowPage, nums, "film_box_office");
+                break;
+        }
+
+
+        if(sourceId != 99) {
+            entityWrapper.eq("film_source", sourceId);
+        }
+
+        if(yearId != 99) {
+
+            entityWrapper.eq("film_date", yearId);
+        }
+
+        if(catId != 99) {
+            String conditionStr = "%#" + catId + "#%";
+            entityWrapper.like("film_cats", conditionStr);
+        }
+
+        List<MoocFilmT> moocFilms = filmTMapper.selectPage(page, entityWrapper);
+
+        filmInfos = getFilmInfos(moocFilms);
+        filmVO.setFilmNum(filmInfos.size());
+
+        Integer totalCount = filmTMapper.selectCount(entityWrapper);
+
+        int totalPages = (totalCount / nums) + 1;
+
+        filmVO.setFilmInfo(filmInfos);
+
+        filmVO.setTotalPage(totalPages);
+        filmVO.setNowPage(nowPage);
+
         return filmVO;
     }
 

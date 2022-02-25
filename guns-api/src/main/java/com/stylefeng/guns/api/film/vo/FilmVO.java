@@ -10,6 +10,8 @@ import java.util.List;
 public class FilmVO implements Serializable {
 
     private Integer filmNum;
+    private Integer totalPage;
+    private Integer nowPage;
     private List<FilmInfo> filmInfo = new LinkedList<>();
 
 }
