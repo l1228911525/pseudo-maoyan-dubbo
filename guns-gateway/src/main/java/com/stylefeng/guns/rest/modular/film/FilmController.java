@@ -2,18 +2,12 @@ package com.stylefeng.guns.rest.modular.film;
 
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.stylefeng.guns.api.film.FilmServiceAPI;
-import com.stylefeng.guns.api.film.vo.CatVO;
-import com.stylefeng.guns.api.film.vo.FilmVO;
-import com.stylefeng.guns.api.film.vo.SourceVO;
-import com.stylefeng.guns.api.film.vo.YearVO;
+import com.stylefeng.guns.api.film.vo.*;
 import com.stylefeng.guns.api.vo.ResponseVO;
 import com.stylefeng.guns.rest.modular.film.vo.FilmConditionVO;
 import com.stylefeng.guns.rest.modular.film.vo.FilmIndexVO;
 import com.stylefeng.guns.rest.modular.film.vo.FilmRuqeustVO;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -171,6 +165,24 @@ public class FilmController {
         }
 
         return ResponseVO.success(filmVO.getNowPage(),filmVO.getTotalPage(), IMG_PRE, filmVO.getFilmInfo());
+
+    }
+
+    @RequestMapping(value = "/films/{searchParam}", method = RequestMethod.GET)
+    public ResponseVO films(@PathVariable(value = "searchParam") String searchParam, Integer searchType) {
+
+        // 根据searchType来判断查询类型
+        FilmDetailVO filmDetailVO = filmServiceAPI.getFilmDetailVO(searchType, searchParam);
+
+        // 不同的查询类型，传入的条件会略有不同
+
+        // 查询影片的详细信息 -> dubbo的异步获取
+
+        // 获取影片描述信息
+
+        // 获取图片信息
+
+        // 获取演员信息
 
     }
 
